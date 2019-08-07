@@ -37,11 +37,14 @@ class RoomList extends Component {
     render () {
         return (
             <div>
+                <header>
+                    <h1>Bloc Chat</h1>
+                </header>
                 <h2>Select a Chat Room</h2>
                 <ul>
                     {this.state.rooms.map((room, key) => (
                         <li key={room.key}>
-                            <button value={room.name}>{room.name}</button>
+                            <button value={room.name} onClick={ (e) => this.props.setActiveRoom(e) }>{room.name}</button>
                         </li>
                     ))}
                 </ul>
