@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
+import User from './components/User';
+import { userInfo } from 'os';
 
 
 var firebaseConfig = {
@@ -22,12 +24,17 @@ class App extends Component {
     super(props);
 
     this.state = {
-      activeRoom: 'No Room Selected'
+      activeRoom: 'No Room Selected',
+      activeUser: 'Guest'
     };
   }
 
   setActiveRoom(e) {
     this.setState({ activeRoom: e.target.value })
+  }
+
+  setUser(user) {
+    this.setState({ activeUser: user.displayName })
   }
 
   render() {
@@ -43,7 +50,12 @@ class App extends Component {
       <MessageList
         firebase={firebase}
         activeRoom={this.state.activeRoom}
-        
+        activeUser={this.state.activeUser}
+      />
+      <User
+        firebase={firebase}
+        setUser={(user) => this.setUser(user)}
+        activeUser={this.state.activeUser}
       />
       </div>
     );
